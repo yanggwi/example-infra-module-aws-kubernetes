@@ -26,7 +26,7 @@ resource "aws_iam_role" "ms-cluster" {
 }
 
 # 클러스터 권한 정책
-resource "aws_iam_policy_attachment" "ms-cluster-AmazoneEKSClusterPolicy" {
+resource "aws_iam_role_policy_attachment" "ms-cluster-AmazoneEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
   role       = aws_iam_role.ms-cluster.name
 }
@@ -57,7 +57,7 @@ resource "aws_eks_cluster" "ms-up-running" {
   }
 
   depends_on = [
-    aws_iam_policy_attachment.ms-cluster-AmazoneEKSClusterPolicy
+    aws_iam_role_policy_attachment.ms-cluster-AmazoneEKSClusterPolicy
   ]
 }
 
